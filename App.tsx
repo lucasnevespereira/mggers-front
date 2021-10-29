@@ -1,30 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import { useGetLocation } from './hooks/useGetLocation';
+import React from 'react';
+import { View } from 'react-native';
+import HomeScreen from './screens/HomeScreen';
 import styles from './styles';
-import { defaultPosition } from './types';
 
-
-export default function App() {
-
-  const [position, setPosition] = useState(defaultPosition)
-
-  useEffect(() => {
-    useGetLocation().then(res => {
-      if (res) {
-        let currPosition = {
-          latitude: res.coords.latitude,
-          longitude: res.coords.longitude
-        }
-        setPosition(currPosition)
-      }
-    })
-  }, [])
-  
+export default function App() {  
   return (
     <View style={styles.container}>
-      <Text>Welcome to Mggers</Text>
-      {position && console.log(position)}
+      <HomeScreen />
     </View>
   );
 }

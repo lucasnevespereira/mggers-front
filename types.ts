@@ -8,9 +8,4 @@ export type Report = {
   reportedAt: Date
 }
 
-export const defaultPosition: Position = {
-  latitude: 0,
-  longitude: 0,
-}
-
 export const defaultReports: Report[] = []
