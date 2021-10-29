@@ -1,5 +1,5 @@
 export enum DELTA {
-  'MAX' = 0.001
+  'MAX' = 0.005
 }
 
 export enum MAPTYPE {
