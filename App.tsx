@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { AppContext } from './context';
 import HomeScreen from './screens/HomeScreen';
 import styles from './styles';
@@ -18,6 +18,7 @@ export default function App() {
       <AppContext.Provider value={appValues}>
         <HomeScreen />
       </AppContext.Provider>
+      <StatusBar animated />
     </View>
   );
 }

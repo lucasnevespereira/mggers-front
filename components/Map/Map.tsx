@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { View } from 'react-native';
-import MapView, { MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+import { Alert, View } from 'react-native';
+import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
 import { Position, Report } from '../../types';
@@ -9,16 +9,32 @@ import { customMapStyles, globalMapStyles } from './MapStyles'
 const Map = (position: Position) => {
   const { reportsContext } = React.useContext(AppContext)
   
-  const onMapPress = (e: MapEvent) => {
+  const addReport = (coords: LatLng) => {    
     let newReport: Report = {
       position: {
-        latitude: e.nativeEvent.coordinate.latitude,
-        longitude: e.nativeEvent.coordinate.longitude,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
       },
       reportedAt: new Date()
     }
 
     reportsContext.setReports([...reportsContext.reports, newReport])
+  }
+  const onMapLongPress = (e: MapEvent) => {
+    const {latitude, longitude} = e.nativeEvent.coordinate
+    return Alert.alert(
+      "Mgger Report",
+      "Do you want to report a new mugger here ?",
+      [
+        {
+          text: "Yes",
+          onPress: () => addReport({latitude, longitude}),
+        },
+        {
+          text: "Cancel",
+        },
+      ]
+    );
   }
 
   const initialRegion = {
@@ -35,10 +51,9 @@ const Map = (position: Position) => {
         style={globalMapStyles}
         customMapStyle={customMapStyles}
         region={initialRegion}
-        showsCompass
         showsMyLocationButton
         showsUserLocation
-        onPress={onMapPress}
+        onLongPress={onMapLongPress}
     >
         {reportsContext.reports.map((r, idx) => {
           { console.log(r) }
