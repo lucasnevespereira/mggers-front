@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Text } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import Map from '../components/Map/Map'
 import { useGetLocation } from '../hooks/useGetLocation'
 import { Position } from '../types'
