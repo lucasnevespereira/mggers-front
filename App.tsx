@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
+import { AppContext } from './context';
 import HomeScreen from './screens/HomeScreen';
 import styles from './styles';
+import { defaultReports } from './types';
 
-export default function App() {  
-  return (
+export default function App() {
+
+  const [reports, setReports] = useState(defaultReports)
+
+  const appValues = {
+    reportsContext: {reports, setReports}
+  }
+
+  return ( 
     <View style={styles.container}>
-      <HomeScreen />
+      <AppContext.Provider value={appValues}>
+        <HomeScreen />
+      </AppContext.Provider>
     </View>
   );
 }

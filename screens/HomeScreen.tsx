@@ -6,7 +6,7 @@ import { Position } from '../types'
 
 
 const HomeScreen = () => {
- const [position, setPosition] = useState<Position | null>(null)
+  const [position, setPosition] = useState<Position | null>(null)
 
   useEffect(() => {
     useGetLocation().then(res => {
@@ -25,7 +25,8 @@ const HomeScreen = () => {
       {position ?
         <Map
           latitude={position.latitude}
-          longitude={position.longitude} />
+          longitude={position.longitude}
+        />
         :
         <Text>You need to grant location access to use the app</Text>
       }
