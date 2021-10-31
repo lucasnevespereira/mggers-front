@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { Pressable, Text, View } from 'react-native'
+import React from 'react'
+import {  ActivityIndicator, Text, View } from 'react-native'
 import Map from '../components/Map/Map'
-import { useGetLocation } from '../hooks/useGetLocation'
-import { Position } from '../types'
+import { AppContext } from '../context'
+import { styles } from '../styles'
 
 
 const HomeScreen = () => {
-  const [position, setPosition] = useState<Position | null>(null)
-
-  useEffect(() => {
-    useGetLocation().then(res => {
-      if (res) {
-        let currPosition = {
-          latitude: res.coords.latitude,
-          longitude: res.coords.longitude
-        }
-        setPosition(currPosition)
-      }
-    })
-  }, [])
+  const { userContext } = React.useContext(AppContext)
 
   return (
     <>
-      {position ?
+      {userContext.position.latitude != 0 ?
         <Map
-          latitude={position.latitude}
-          longitude={position.longitude}
+          latitude={userContext.position.latitude}
+          longitude={userContext.position.longitude}
         />
         :
-        <Text>You need to grant location access to use the app</Text>
+        <View style={styles.container}>
+          <Text style={styles.titleCenter}>Loading...</Text>
+          <ActivityIndicator size="large" />
+        </View>
+
       }
     </>
   )

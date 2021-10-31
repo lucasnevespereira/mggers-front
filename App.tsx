@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppContext } from './context';
 import { MainNavigator } from './navigator';
-import { defaultReports } from './types';
+import { defaultPosition, defaultReports, Position } from './types';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins';
+import { useGetLocation } from './hooks/useGetLocation';
 
 export default function App() {
 
@@ -17,10 +18,25 @@ export default function App() {
 
   const [reports, setReports] = useState(defaultReports)
 
+  const [position, setPosition] = useState<Position>(defaultPosition)
+  useEffect(() => {
+    useGetLocation().then(res => {
+      if (res) {
+        let currPosition = {
+          latitude: res.coords.latitude,
+          longitude: res.coords.longitude
+        }
+        setPosition(currPosition)
+      }
+    })
+  }, [])
+
   const appValues = {
-    reportsContext: {reports, setReports}
+    reportsContext: { reports, setReports },
+    userContext: {position, setPosition}
   }
-  if (!fontsLoaded) {
+
+  if (!fontsLoaded && position.latitude === 0) {
     return <AppLoading />;
   } else {
     return (

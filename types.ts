@@ -8,6 +8,18 @@ export type Report = {
   reportedAt: Date
 }
 
+export type Contact = {
+  id: number
+  number: string,
+  icon: string,
+  desc: string,
+}
+
+export const defaultPosition: Position = {
+  latitude: 0,
+  longitude: 0,
+}
+
 export const defaultReports: Report[] = [
   {
     position: {

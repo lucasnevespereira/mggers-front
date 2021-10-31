@@ -23,6 +23,16 @@ export const styles = StyleSheet.create({
     padding: 20,
     fontFamily: 'Poppins_700Bold'
   },
+  titleCenter: {
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    color: COLORS.PURPLE,
+    width: Dimensions.get('window').width,
+    fontSize: 24,
+    padding: 20,
+    fontFamily: 'Poppins_700Bold'
+  },
   paragraph: {
     margin: 24,
     fontSize: 18,
@@ -33,21 +43,31 @@ export const styles = StyleSheet.create({
   card: {
     display: "flex",
     flexDirection: 'row',
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
     alignItems: "center",
     borderRadius: 20,
     fontFamily: "Roboto_500Medium",
-    width: Dimensions.get('screen').width - 50,
+    width: Dimensions.get('screen').width - 30,
     height: 50,
     marginTop: 10,
     padding: 10,
     backgroundColor: COLORS.WHITE,
 
   },
-  cardText: {
-    marginLeft: 20,
+  cardTextNumber: {
+    marginLeft: 5,
     fontSize: 20,
     fontFamily: "Poppins_700Bold",
+  },
+  cardTextDesc: {
+    // marginLeft: 20,
+    fontSize: 17,
+    fontFamily: "Poppins_400Regular",
+    textAlign: "right",
+  },
+  cardIcon: {
+    width: 64,
+    height: 64,
   }
 });
 

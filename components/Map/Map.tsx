@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Alert, View } from 'react-native';
+import React from 'react'
+import { Alert } from 'react-native';
 import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
@@ -44,7 +44,6 @@ const Map = (position: Position) => {
     longitudeDelta: DELTA.MAX,
   }
   return (
-    <View>
     <MapView
         provider={PROVIDER_GOOGLE}
         mapType={MAPTYPE.STANDARD}
@@ -70,7 +69,6 @@ const Map = (position: Position) => {
           )
       })}
     </MapView>
-    </View>
   )
 }
 
