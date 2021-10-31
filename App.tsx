@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppContext } from './context';
-import HomeScreen from './screens/HomeScreen';
-import styles from './styles';
+import { MainNavigator } from './navigator';
 import { defaultReports } from './types';
+import AppLoading from 'expo-app-loading';
+import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_700Bold,
+  });
 
   const [reports, setReports] = useState(defaultReports)
 
   const appValues = {
     reportsContext: {reports, setReports}
   }
-
-  return ( 
-    <View style={styles.container}>
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
       <AppContext.Provider value={appValues}>
-        <HomeScreen />
+        <SafeAreaProvider>
+          <MainNavigator />
+          <StatusBar />
+        </SafeAreaProvider>
       </AppContext.Provider>
-      <StatusBar animated />
-    </View>
-  );
+    );
+  }
 }

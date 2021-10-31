@@ -4,7 +4,7 @@ import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
 import { Position, Report } from '../../types';
-import { customMapStyles, globalMapStyles } from './MapStyles'
+import { AraraTheme, customMapStyles, globalMapStyles } from './MapStyles'
 
 const Map = (position: Position) => {
   const { reportsContext } = React.useContext(AppContext)
@@ -49,9 +49,9 @@ const Map = (position: Position) => {
         provider={PROVIDER_GOOGLE}
         mapType={MAPTYPE.STANDARD}
         style={globalMapStyles}
-        customMapStyle={customMapStyles}
+        customMapStyle={AraraTheme}
         region={initialRegion}
-        showsMyLocationButton
+        zoomControlEnabled
         showsUserLocation
         onLongPress={onMapLongPress}
     >
