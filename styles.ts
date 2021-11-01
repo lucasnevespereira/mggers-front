@@ -4,6 +4,7 @@ export enum COLORS {
   PURPLE = '#300E80',
   GREY = '#eee',
   WHITE = '#fff',
+  CYAN = '#00E8BC'
 }
 
 export const styles = StyleSheet.create({
@@ -43,10 +44,10 @@ export const styles = StyleSheet.create({
   card: {
     display: "flex",
     flexDirection: 'row',
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     alignItems: "center",
     borderRadius: 20,
-    fontFamily: "Roboto_500Medium",
+    fontFamily: "Poppins_500Medium",
     width: Dimensions.get('screen').width - 30,
     height: 50,
     marginTop: 10,
@@ -68,6 +69,44 @@ export const styles = StyleSheet.create({
   cardIcon: {
     width: 64,
     height: 64,
+  },
+  marker: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+  },
+  callout: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    borderRadius: 10,
+    width: 200,
+    height: 80,
+    padding: 10,
+    backgroundColor: COLORS.WHITE,
+    borderWidth: 3,
+    borderColor: COLORS.CYAN,
+  },
+  calloutTitle: {
+    fontSize: 17,
+    fontWeight: "700",
+    fontFamily: 'Poppins_700Bold'
+  },
+  mggerBtn: {
+    borderRadius: 8,
+    paddingVertical: 10,
+    width: "30%",
+    position: "absolute",
+    bottom: 100,
+    right: Dimensions.get("screen").width - 250,
+  },
+  mggerBtnText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    color: "#fff",
+    flexWrap: 'wrap'
   }
 });
 

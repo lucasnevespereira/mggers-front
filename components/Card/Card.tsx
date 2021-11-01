@@ -19,7 +19,7 @@ function Card(props: { text: string, icon: string, desc: string }) {
   
   return (
     <Pressable style={styles.card} onPress={handleCall}>
-      <View style={{display: "flex", alignContent:"center", flexDirection: "row", alignItems:"center"}}>
+      {/* <View style={{display: "flex", alignContent:"center", flexDirection: "row", alignItems:"center"}}> */}
         <Ionicons
           name={props.icon == "call" ? props.icon : "link"}
           size={20}
@@ -27,10 +27,9 @@ function Card(props: { text: string, icon: string, desc: string }) {
           style={{
             fontWeight: "700"
           }}
-        />
+      />
+        <Text style={styles.cardTextDesc}> {props.desc} </Text>
         <Text style={styles.cardTextNumber}> {props.text} </Text>
-      </View>
-      <Text style={styles.cardTextDesc}> {props.desc} </Text>
     </Pressable>
   )
 }

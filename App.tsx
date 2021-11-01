@@ -7,8 +7,17 @@ import { defaultPosition, defaultReports, Position } from './types';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins';
 import { useGetLocation } from './hooks/useGetLocation';
+import { Asset, useAssets } from 'expo-asset';
 
 export default function App() {
+
+  const [assets] = useAssets([
+    require('./assets/icons/mgger.png'),
+    require('./assets/icons/burglar-32.png'),
+    require('./assets/icons/burglar-64.png'),
+    require('./assets/icons/burglar-64-yellow.png')
+
+  ]);
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -36,7 +45,7 @@ export default function App() {
     userContext: {position, setPosition}
   }
 
-  if (!fontsLoaded && position.latitude === 0) {
+  if (!fontsLoaded || position.latitude === 0 || !assets) {
     return <AppLoading />;
   } else {
     return (

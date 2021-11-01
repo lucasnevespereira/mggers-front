@@ -1,16 +1,21 @@
 import React from 'react'
-import { Alert } from 'react-native';
-import MapView, { LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
+import { Alert, View, ImageBackground, Text } from 'react-native';
+import MapView, { Callout, LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
+import { COLORS, styles } from '../../styles';
 import { Position, Report } from '../../types';
-import { AraraTheme, customMapStyles, globalMapStyles } from './MapStyles'
+import { AraraTheme, globalMapStyles } from './MapStyles'
+import Moment from 'react-moment';
+import moment from 'moment';
+import { MggerBtn } from '../Button/Button';
 
 const Map = (position: Position) => {
   const { reportsContext } = React.useContext(AppContext)
   
   const addReport = (coords: LatLng) => {    
     let newReport: Report = {
+      id: 0,
       position: {
         latitude: coords.latitude,
         longitude: coords.longitude,
@@ -54,18 +59,28 @@ const Map = (position: Position) => {
         showsUserLocation
         onLongPress={onMapLongPress}
     >
-        {reportsContext.reports.map((r, idx) => {
-          { console.log(r) }
-          return (
-        <Marker
-           key={idx}
-           coordinate={{
-             latitude: r.position.latitude,
-             longitude: r.position.longitude
-           }}
-           title={"Mgger Report"}
-           description={r.reportedAt.toTimeString()}
-            />
+      {reportsContext.reports.map((r, index) => {
+          const time = moment(r.reportedAt).fromNow()
+        return (
+          <Marker
+            key={r.id}
+            coordinate={{
+              latitude: r.position.latitude,
+              longitude: r.position.longitude
+            }}
+            title={"Mgger Report"}
+            description={time}
+            >
+            <Callout tooltip >
+              <View style={styles.callout}>
+                <Text style={styles.calloutTitle}>{"Mgger Report"}</Text>
+                <Text>{time}</Text>
+              </View>
+            </Callout>
+              <View>
+              <ImageBackground style={styles.marker} source={require('../../assets/icons/burglar-64.png')} />
+              </View>
+          </Marker>
           )
       })}
     </MapView>

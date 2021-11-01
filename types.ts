@@ -4,6 +4,7 @@ export type Position = {
 }
 
 export type Report = {
+  id: number
   position: Position
   reportedAt: Date
 }
@@ -22,6 +23,7 @@ export const defaultPosition: Position = {
 
 export const defaultReports: Report[] = [
   {
+    id: 1,
     position: {
       latitude: 48.92944647877044,
       longitude: 2.048076657335187,
@@ -29,6 +31,7 @@ export const defaultReports: Report[] = [
     reportedAt: new Date,
   },
   {
+    id: 3,
     position: {
       latitude: 48.93095405947195,
       longitude: 2.0506704835423673,

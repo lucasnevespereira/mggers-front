@@ -49,7 +49,7 @@ export function MainNavigator() {
             options={{
               title: 'Home',
               headerShown: false,
-              tabBarIcon: () => <Ionicons name="home" size={24} color={COLORS.PURPLE} />,
+              tabBarIcon: () => <Ionicons name="map" size={24} color={COLORS.PURPLE} />,
             }}
           />
           <Tab.Screen name="Settings" component={SettingsScreen} options={{
