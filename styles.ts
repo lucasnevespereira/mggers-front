@@ -93,12 +93,14 @@ export const styles = StyleSheet.create({
     fontFamily: 'Poppins_700Bold'
   },
   mggerBtn: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    width: "30%",
+    borderRadius: 50,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    width: "50%",
     position: "absolute",
     bottom: 100,
-    right: Dimensions.get("screen").width - 250,
+    alignSelf: 'center',
+    marginHorizontal: 50
   },
   mggerBtnText: {
     fontSize: 18,
