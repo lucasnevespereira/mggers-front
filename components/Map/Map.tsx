@@ -3,27 +3,41 @@ import { Alert, View, ImageBackground, Text } from 'react-native';
 import MapView, { Callout, LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
-import { COLORS, styles } from '../../styles';
+import { styles } from '../../styles';
 import { Position, Report } from '../../types';
 import { AraraTheme, globalMapStyles } from './MapStyles'
-import Moment from 'react-moment';
 import moment from 'moment';
-import { MggerBtn } from '../Button/Button';
+import axios from 'axios';
+import config from '../../config';
 
 const Map = (position: Position) => {
   const { reportsContext } = React.useContext(AppContext)
-  
-  const addReport = (coords: LatLng) => {    
-    let newReport: Report = {
-      id: 0,
+
+  const addReport = (coords: LatLng) => { 
+    let newRequest = {
+      description: "",
       position: {
         latitude: coords.latitude,
-        longitude: coords.longitude,
+        longitude: coords.longitude
       },
-      reportedAt: new Date()
+      reportedAt: new Date().toISOString()
     }
 
-    reportsContext.setReports([...reportsContext.reports, newReport])
+    axios.post(`${config.API_URL}/api/create`, newRequest)
+      .then(res => {
+        let newReport: Report = {
+          id: res.data._id,
+          description: res.data.description,
+          position: res.data.position,
+          reportedAt: res.data.reportedAt
+        }
+
+        reportsContext.setReports([...reportsContext.reports, newReport])
+      })
+      .catch(e => {
+        console.error(e)
+        alert(e)
+      })
   }
   const onMapLongPress = (e: MapEvent) => {
     const {latitude, longitude} = e.nativeEvent.coordinate
@@ -63,7 +77,7 @@ const Map = (position: Position) => {
           const time = moment(r.reportedAt).fromNow()
         return (
           <Marker
-            key={r.id}
+            key={index}
             coordinate={{
               latitude: r.position.latitude,
               longitude: r.position.longitude

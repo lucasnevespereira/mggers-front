@@ -8,6 +8,8 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins';
 import { useGetLocation } from './hooks/useGetLocation';
 import { Asset, useAssets } from 'expo-asset';
+import { useGetReports } from './hooks/useGetReports';
+import axios from 'axios';
 
 export default function App() {
 
@@ -25,6 +27,7 @@ export default function App() {
     Poppins_700Bold,
   });
 
+
   const [reports, setReports] = useState(defaultReports)
 
   const [position, setPosition] = useState<Position>(defaultPosition)
@@ -38,6 +41,11 @@ export default function App() {
         setPosition(currPosition)
       }
     })
+
+    useGetReports().then(res => {
+      setReports(res)
+    }).catch(e => console.error(e))
+
   }, [])
 
   const appValues = {

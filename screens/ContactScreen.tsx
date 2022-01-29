@@ -40,7 +40,7 @@ function ContactScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Emergency Contacts </Text>
+      <Text style={styles.title}>Emergency Contacts</Text>
       <FlatList
         data={contacts}
         renderItem={renderContact}

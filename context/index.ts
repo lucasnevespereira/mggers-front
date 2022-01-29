@@ -1,7 +1,6 @@
 import React from "react";
 import { defaultPosition, defaultReports, Position, Report } from "../types";
 
-
 export const AppContext = React.createContext({
   reportsContext: {
     reports: defaultReports,
