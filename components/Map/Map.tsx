@@ -31,7 +31,6 @@ const Map = (position: Position) => {
           position: res.data.position,
           reportedAt: res.data.reportedAt
         }
-
         reportsContext.setReports([...reportsContext.reports, newReport])
       })
       .catch(e => {
@@ -74,7 +73,7 @@ const Map = (position: Position) => {
         onLongPress={onMapLongPress}
     >
       {reportsContext.reports.map((r, index) => {
-          const time = moment(r.reportedAt).fromNow()
+        const time = moment(r.reportedAt).fromNow()
         return (
           <Marker
             key={index}

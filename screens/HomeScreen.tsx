@@ -13,6 +13,7 @@ const HomeScreen = () => {
   const addReport = (coords: LatLng) => {    
     let newReport: Report = {
       id: 0,
+      description: "",
       position: {
         latitude: coords.latitude,
         longitude: coords.longitude,

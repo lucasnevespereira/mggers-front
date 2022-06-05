@@ -3,13 +3,13 @@ import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppContext } from './context';
 import { MainNavigator } from './navigator';
-import { defaultPosition, defaultReports, Position } from './types';
+import { defaultPosition, defaultReports, Position, Report } from './types';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold} from '@expo-google-fonts/poppins';
-import { useGetLocation } from './hooks/useGetLocation';
-import { Asset, useAssets } from 'expo-asset';
-import { useGetReports } from './hooks/useGetReports';
+import { useAssets } from 'expo-asset';
 import axios from 'axios';
+import config from './config';
+import * as Location from 'expo-location'
 
 export default function App() {
 
@@ -27,25 +27,36 @@ export default function App() {
     Poppins_700Bold,
   });
 
-
-  const [reports, setReports] = useState(defaultReports)
-
+  const [reports, setReports] = useState<Report[]>(defaultReports)
   const [position, setPosition] = useState<Position>(defaultPosition)
+  const fetchReports = async () => {
+    axios.get(`${config.API_URL}/api/reports`)
+      .then(res => {
+        setReports(res.data.results)
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }
+  const fetchLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.warn('Permission to access location was denied');
+      return;
+    }
+    return await Location.getCurrentPositionAsync()
+  }
+
   useEffect(() => {
-    useGetLocation().then(res => {
-      if (res) {
-        let currPosition = {
-          latitude: res.coords.latitude,
-          longitude: res.coords.longitude
-        }
-        setPosition(currPosition)
+    fetchLocation().then(location => {
+      if (location) {
+        setPosition({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        })
       }
     })
-
-    useGetReports().then(res => {
-      setReports(res)
-    }).catch(e => console.error(e))
-
+    fetchReports()
   }, [])
 
   const appValues = {
@@ -53,7 +64,7 @@ export default function App() {
     userContext: {position, setPosition}
   }
 
-  if (!fontsLoaded || position.latitude === 0 || !assets) {
+  if (!fontsLoaded || !position || !assets) {
     return <AppLoading />;
   } else {
     return (

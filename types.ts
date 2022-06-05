@@ -1,16 +1,16 @@
-export type Position = {
+export interface Position {
   latitude: number,
   longitude: number,
 }
 
-export type Report = {
+export interface Report {
   id: number
   description: string
   position: Position
   reportedAt: Date
 }
 
-export type Contact = {
+export interface Contact {
   id: number
   number: string,
   icon: string,
@@ -25,20 +25,8 @@ export const defaultPosition: Position = {
 export const defaultReports: Report[] = [
   {
     id: 1,
-    description: "Mgger Report",
-    position: {
-      latitude: 48.92944647877044,
-      longitude: 2.048076657335187,
-    },
+    description: "Example Report",
+    position: defaultPosition,
     reportedAt: new Date,
-  },
-  {
-    id: 3,
-    description: "Mgger Report",
-    position: {
-      latitude: 48.93095405947195,
-      longitude: 2.0506704835423673,
-    },
-    reportedAt: new Date,
-  },
+  }
 ];
