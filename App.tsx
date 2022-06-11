@@ -30,9 +30,11 @@ export default function App() {
   const [reports, setReports] = useState<Report[]>(defaultReports)
   const [position, setPosition] = useState<Position>(defaultPosition)
   const fetchReports = async () => {
-    axios.get(`${config.API_URL}/api/reports`)
+    axios.get(`${config.API_URL}/reports`)
       .then(res => {
-        setReports(res.data.results)
+        if (res.data.results) {
+          setReports(res.data.results)
+        }
       })
       .catch(e => {
         console.error(e)

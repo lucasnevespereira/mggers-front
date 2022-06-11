@@ -23,7 +23,7 @@ const Map = (position: Position) => {
       reportedAt: new Date().toISOString()
     }
 
-    axios.post(`${config.API_URL}/api/create`, newRequest)
+    axios.post(`${config.API_URL}/reports/create`, newRequest)
       .then(res => {
         let newReport: Report = {
           id: res.data._id,
