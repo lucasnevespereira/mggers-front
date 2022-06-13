@@ -1,0 +1,13 @@
+{
+  "report": "Signaler",
+  "settings": "Réglages",
+  "emergencyContacts": "Contacts d'Urgence",
+  "generalNum": "112",
+  "fireForceNum": "18",
+  "medicalNum": "15",
+  "policeNum": "17",
+  "fireForce": "Pompiers",
+  "police": "Police",
+  "medical": "Samu",
+  "general": "Géneral"
+}

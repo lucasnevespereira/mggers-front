@@ -1,0 +1,13 @@
+{
+  "report": "Report",
+  "settings": "Settings",
+  "emergencyContacts": "Emergency Contacts",
+  "generalNum": "911",
+  "fireForceNum": "911",
+  "medicalNum": "911",
+  "policeNum": "911",
+  "fireForce": "Pompiers",
+  "police": "Police",
+  "medical": "Samu",
+  "general": "General"
+}
