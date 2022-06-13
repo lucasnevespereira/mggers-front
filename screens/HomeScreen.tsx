@@ -1,9 +1,11 @@
+import axios from 'axios'
 import I18n from 'i18n-js'
 import React from 'react'
 import {  ActivityIndicator, Alert, Text, View } from 'react-native'
 import { LatLng } from 'react-native-maps'
 import { MggerBtn } from '../components/Buttons/MggerBtn'
 import Map from '../components/Map/Map'
+import config from '../config'
 import { AppContext } from '../context'
 import { COLORS, styles } from '../styles'
 import { Report } from '../types'
@@ -11,18 +13,30 @@ import { Report } from '../types'
 
 const HomeScreen = () => {
   const { userContext, reportsContext } = React.useContext(AppContext)
-  const addReport = (coords: LatLng) => {    
-    let newReport: Report = {
-      id: 0,
+  const addReport = (coords: LatLng) => { 
+    let newRequest = {
       description: "",
       position: {
         latitude: coords.latitude,
-        longitude: coords.longitude,
+        longitude: coords.longitude
       },
-      reportedAt: new Date()
+      reportedAt: new Date().toISOString()
     }
 
-    reportsContext.setReports([...reportsContext.reports, newReport])
+    axios.post(`${config.API_URL}/reports/create`, newRequest)
+      .then(res => {
+        let newReport: Report = {
+          id: res.data._id,
+          description: res.data.description,
+          position: res.data.position,
+          reportedAt: res.data.reportedAt
+        }
+        reportsContext.setReports([...reportsContext.reports, newReport])
+      })
+      .catch(e => {
+        console.error(e)
+        alert(e)
+      })
   }
   const onReportPress = () => {
     const {latitude, longitude} = userContext.position
