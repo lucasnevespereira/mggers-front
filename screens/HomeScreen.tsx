@@ -1,7 +1,7 @@
 import React from 'react'
 import {  ActivityIndicator, Alert, Text, View } from 'react-native'
 import { LatLng } from 'react-native-maps'
-import { MggerBtn } from '../components/Button/Button'
+import { MggerBtn } from '../components/Buttons/MggerBtn'
 import Map from '../components/Map/Map'
 import { AppContext } from '../context'
 import { COLORS, styles } from '../styles'

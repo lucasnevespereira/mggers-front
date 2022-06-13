@@ -1,6 +1,5 @@
 import React from 'react'
-import {  Pressable, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import {  Pressable, Text } from 'react-native'
 import { styles } from '../../styles'
 
 export function MggerBtn(props:{

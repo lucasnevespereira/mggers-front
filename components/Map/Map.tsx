@@ -3,15 +3,18 @@ import { Alert, View, ImageBackground, Text } from 'react-native';
 import MapView, { Callout, LatLng, MapEvent, Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { AppContext } from '../../context';
 import { DELTA, MAPTYPE } from '../../enum';
-import { styles } from '../../styles';
+import { COLORS, styles } from '../../styles';
 import { Position, Report } from '../../types';
 import { AraraTheme, globalMapStyles } from './MapStyles'
 import moment from 'moment';
 import axios from 'axios';
 import config from '../../config';
+import { LocateMeBtn } from '../Buttons/LocateMeBtn';
 
 const Map = (position: Position) => {
   const { reportsContext } = React.useContext(AppContext)
+
+  const mapViewRef = React.createRef<MapView>();
 
   const addReport = (coords: LatLng) => { 
     let newRequest = {
@@ -61,8 +64,12 @@ const Map = (position: Position) => {
     latitudeDelta: DELTA.MAX,
     longitudeDelta: DELTA.MAX,
   }
+  const onLocateUser = () => {
+    mapViewRef.current?.animateToRegion(initialRegion)
+  }
   return (
     <MapView
+        ref={mapViewRef}
         provider={PROVIDER_GOOGLE}
         mapType={MAPTYPE.STANDARD}
         style={globalMapStyles}
@@ -70,8 +77,13 @@ const Map = (position: Position) => {
         region={initialRegion}
         zoomControlEnabled
         showsUserLocation
-        onLongPress={onMapLongPress}
+      onLongPress={onMapLongPress}
     >
+      <LocateMeBtn
+        iconSize={40}
+        iconColor={COLORS.CYAN}
+        iconStyle={styles.topMapIcon}
+        onPress={onLocateUser} />
       {reportsContext.reports.map((r, index) => {
         const time = moment(r.reportedAt).fromNow()
         return (
@@ -96,7 +108,7 @@ const Map = (position: Position) => {
           </Marker>
           )
       })}
-    </MapView>
+      </MapView>
   )
 }
 
