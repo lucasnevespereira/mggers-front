@@ -94,21 +94,28 @@ export const styles = StyleSheet.create({
   },
   mggerBtn: {
     borderRadius: 50,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-    width: "50%",
+    padding: 15,
+    width: "35%",
     position: "absolute",
-    bottom: 100,
+    bottom: 120,
     alignSelf: 'center',
     marginHorizontal: 50
   },
   mggerBtnText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
     textTransform: "uppercase",
     color: "#fff",
     flexWrap: 'wrap'
+  },
+  topMapIcon: {
+    opacity: 1,
+    borderRadius: 50,
+    padding: 5,
+    position: "absolute",
+    top: 45,
+    alignSelf: "flex-end"
   }
 });
 
