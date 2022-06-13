@@ -10,8 +10,21 @@ import { useAssets } from 'expo-asset';
 import axios from 'axios';
 import config from './config';
 import * as Location from 'expo-location'
+import * as Localization from 'expo-localization';
+import i18n from 'i18n-js';
+import langEn from './lang/en-us.json'
+import langFr  from './lang/fr-fr.json'
 
 export default function App() {
+
+  i18n.translations = {
+    "en": langEn,
+    "fr-FR": langFr
+  };
+
+  // set locale device language
+  i18n.locale = Localization.locale;
+  
 
   const [assets] = useAssets([
     require('./assets/icons/mgger.png'),
@@ -63,7 +76,7 @@ export default function App() {
 
   const appValues = {
     reportsContext: { reports, setReports },
-    userContext: {position, setPosition}
+    userContext: { position, setPosition }
   }
 
   if (!fontsLoaded || !position || !assets) {

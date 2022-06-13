@@ -1,38 +1,38 @@
+import I18n from 'i18n-js';
 import React from 'react'
 import { FlatList, Text, View, ListRenderItem } from 'react-native';
 import Card from '../components/Card/Card';
 import { styles } from '../styles';
 import { Contact } from '../types';
 
-const contacts: Contact[] = [
-  {
-    id: 1,
-    number: "112",
-    icon: "call",
-    desc: "Géneral",
-  },
-  {
-    id: 2,
-    number: "15",
-    icon: "call",
-    desc: "Samu",
-  },
-  {
-    id: 3,
-    number: "17",
-    icon: "call",
-    desc: "Police",
-  },
-  {
-    id: 4,
-    number: "18",
-    icon: "call",
-    desc: "Pompiers",
-  },
-];
-
-
 function ContactScreen() {
+
+  const contacts: Contact[] = [
+    {
+      id: 1,
+      number: I18n.t('generalNum'),
+      icon: "call",
+      desc: I18n.t('general'),
+    },
+    {
+      id: 2,
+      number: I18n.t('medicalNum'),
+      icon: "call",
+      desc: I18n.t('medical'),
+    },
+    {
+      id: 3,
+      number: I18n.t('policeNum'),
+      icon: "call",
+      desc: I18n.t('police'),
+    },
+    {
+      id: 4,
+      number: I18n.t('fireForceNum'),
+      icon: "call",
+      desc: I18n.t('fireForce'),
+    },
+  ];
 
   const renderContact: ListRenderItem<Contact> = ({item: {number, icon, desc }}) => (
     <Card desc={desc} text={number} icon={icon} />
@@ -40,7 +40,7 @@ function ContactScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Emergency Contacts</Text>
+      <Text style={styles.title}>{I18n.t('emergencyContacts')}</Text>
       <FlatList
         data={contacts}
         renderItem={renderContact}

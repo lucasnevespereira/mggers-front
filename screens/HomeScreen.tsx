@@ -1,3 +1,4 @@
+import I18n from 'i18n-js'
 import React from 'react'
 import {  ActivityIndicator, Alert, Text, View } from 'react-native'
 import { LatLng } from 'react-native-maps'
@@ -49,7 +50,7 @@ const HomeScreen = () => {
             latitude={userContext.position.latitude}
             longitude={userContext.position.longitude}
           />
-          <MggerBtn title={'Report'} bgColor={COLORS.CYAN} onPress={onReportPress}/>
+          <MggerBtn title={I18n.t('report')} bgColor={COLORS.CYAN} onPress={onReportPress}/>
           </>
         :
         <View style={styles.container}>
