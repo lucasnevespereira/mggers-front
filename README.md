@@ -2,6 +2,8 @@
 
 Mobile application to report muggers and dangers, find nearest police stations and medical cares
 
+Backend made with Golang [mggers-reports-api](https://github.com/lucasnevespereira/mggers-reports-api)
+
 ### App Demo
 
 <img src="assets/videos/demo-app.gif" width="300" height="600">
